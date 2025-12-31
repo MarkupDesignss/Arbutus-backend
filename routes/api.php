@@ -6,10 +6,8 @@ use App\Http\Controllers\Api\BannerController;
 use App\Http\Controllers\Api\ContactController;
 use App\Http\Controllers\Api\NewsLetterController;
 use App\Http\Controllers\Api\AuthController;
-
-Route::get('/user', function (Request $request) {
-    return $request->user();
-})->middleware('auth:sanctum');
+use App\Http\Controllers\Api\SettingController;
+use App\Http\Controllers\Api\BlogController;
 
 
 Route::post('/send-otp', [AuthController::class, 'sendOtp']);
@@ -22,5 +20,18 @@ Route::get('/banners', [BannerController::class, 'index']);
 Route::post('/contact-submit', [ContactController::class, 'index']);
 
 //Newsletter Subscription
-Route::post('/newsletter-subscribe', [NewsLetterController::class, 'subscribe']);
-    
+Route::post('/add-subscribe', [NewsLetterController::class, 'subscribe']);
+
+//Get Settings
+Route::get('/settings', [SettingController::class, 'index']);
+
+//Get Blogs
+Route::get('blogs', [BlogController::class, 'list']);
+Route::get('blogs/{slug}', [BlogController::class, 'details']);
+
+Route::middleware('auth:sanctum')->group(function () {
+    Route::get('/profile', [AuthController::class,'profile']);
+    Route::post('/profile-update', [AuthController::class,'updateProfile']);
+    Route::post('/logout', [AuthController::class,'logout']);
+    Route::post('/delete-account', [AuthController::class, 'deleteAccount']);
+});

@@ -60,4 +60,5 @@ class RiskRatingController extends Controller
         $risk_rating->delete();
         return redirect()->route('admin.risk.rating.list')->with('success', 'Risk rating deleted successfully.');
     }
+    
 }

@@ -17,6 +17,8 @@ use App\Http\Controllers\Admin\ImportJobRowController;
 use App\Http\Controllers\Admin\BannerController;
 use App\Http\Controllers\Admin\ContactController;
 use App\Http\Controllers\Admin\NewsLetterController;
+use App\Http\Controllers\Admin\SettingController;
+use App\Http\Controllers\Admin\BlogController;
 use Illuminate\Support\Facades\Artisan;
 
 Route::get('/', function () {
@@ -192,5 +194,25 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::delete('/destroy/{id}', [NewsLetterController::class,'destroy'])->name('destroy');
         });
         /*---------------------------------End NewsLetter Controller-----------------------------------------*/
+
+        /*---------------------------------Setting Controller ------------------------------------------------*/
+        Route::prefix('settings')->name('settings.')->group(function () {
+            Route::get('/', [SettingController::class, 'index'])->name('edit');
+            Route::post('settings/update', [SettingController::class, 'update'])->name('update');
+        });
+        /*---------------------------------End Setting Controller--------------------------------------------*/
+
+        /*---------------------------------BlogController----------------------------------------------------*/
+         Route::prefix('bolg')->name('blog.')->group(function () {
+            Route::get('/list', [BlogController::class,'index'])->name('list');
+            Route::get('/add', [BlogController::class,'create'])->name('create');
+            Route::post('/store', [BlogController::class,'store'])->name('store');
+            Route::get('/edit/{id}', [BlogController::class,'edit'])->name('edit');
+            Route::post('/update/{id}', [BlogController::class,'update'])->name('update');
+            Route::delete('/destroy/{id}', [BlogController::class,'destroy'])->name('destroy');
+            Route::get('/view/{id}', [BlogController::class,'show'])->name('show');
+        });
+        /*---------------------------------End BlogController-----------------------------------------------*/
+
     });
 }); 

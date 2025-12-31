@@ -13,7 +13,7 @@
                 class="sidebar-item has-submenu {{ request()->routeIs('admin.asset.class.*') || request()->routeIs('admin.type.*') || request()->routeIs('admin.strategie.*') || request()->routeIs('admin.category.*') || request()->routeIs('admin.risk.rating.*') || request()->routeIs('admin.firms.*') ? 'open active' : '' }}">
                 <a href="javascript:void(0);" class="nav-item sidebar-link">
                     <i class="nav-icon bi bi-tree-fill"></i>
-                    <span class="nav-label">Master Green</span>
+                    <span class="nav-label">Master Data</span>
                     <i class="bi bi-chevron-down ms-auto arrow"></i>
                 </a>
 
@@ -64,6 +64,12 @@
             </li>
         </ul>
 
+        <a href="{{ route('admin.funds.list') }}"
+            class="nav-item {{ request()->routeIs('admin.funds.*') ? 'active' : '' }}">
+            <i class="nav-icon bi bi-wallet2"></i>
+            <span class="nav-label">Fund</span>
+        </a>
+
         <!-- ✅ Import Jobs as separate sidebar item -->
         <a href="{{ route('admin.import-jobs.list') }}"
             class="nav-item {{ request()->routeIs('admin.import-jobs.*') ? 'active' : '' }}">
@@ -77,13 +83,7 @@
            <i class="nav-icon bi bi-check2-square"></i>
 
             <span class="nav-label">Import Job Row</span>
-        </a>
-
-        <a href="{{ route('admin.funds.list') }}"
-            class="nav-item {{ request()->routeIs('admin.funds.*') ? 'active' : '' }}">
-            <i class="nav-icon bi bi-wallet2"></i>
-            <span class="nav-label">Fund</span>
-        </a>
+        </a>        
 
         <a href="{{ route('admin.pages.list') }}"
             class="nav-item {{ request()->routeIs('admin.pages.*') ? 'active' : '' }}">
@@ -115,8 +115,22 @@
         <a href="{{ route('admin.newsletter-subscribe.list') }}"
             class="nav-item {{ request()->routeIs('admin.newsletter-subscribe.*') ? 'active' : '' }}">
             <i class="nav-icon bi bi-newspaper"></i>
-            <span class="nav-label">Newsletter Subscribe</span>
+            <span class="nav-label">Subscribe</span>
         </a>
+
+        <!-- Blog -->
+         <a href="{{ route('admin.blog.list') }}"
+            class="nav-item {{ request()->routeIs('admin.blog.*') ? 'active' : '' }}">
+            <i class="nav-icon bi bi-newspaper"></i>
+            <span class="nav-label">Blogs</span>
+        </a>
+
+        <!-- Settings Section -->
+        <a href="{{ route('admin.settings.edit') }}"
+            class="nav-item {{ request()->routeIs('admin.settings.*') ? 'active' : '' }}">
+            <i class="nav-icon bi bi-newspaper"></i>
+            <span class="nav-label">Settings</span>
+        </a>    
 
         <div class="nav-section">Account</div>
 
