@@ -1,0 +1,146 @@
+<aside class="sidebar" id="sidebar">
+    <div class="sidebar-nav">
+        <!-- Dashboard -->
+        <a href="{{ route('admin.dashboard') }}"
+            class="nav-item {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">
+            <i class="nav-icon bi bi-speedometer2"></i>
+            <span class="nav-label">Dashboard</span>
+        </a>
+
+
+        <ul>
+            <li
+                class="sidebar-item has-submenu {{ request()->routeIs('admin.asset.class.*') || request()->routeIs('admin.type.*') || request()->routeIs('admin.strategie.*') || request()->routeIs('admin.category.*') || request()->routeIs('admin.risk.rating.*') || request()->routeIs('admin.firms.*') ? 'open active' : '' }}">
+                <a href="javascript:void(0);" class="nav-item sidebar-link">
+                    <i class="nav-icon bi bi-tree-fill"></i>
+                    <span class="nav-label">Master Green</span>
+                    <i class="bi bi-chevron-down ms-auto arrow"></i>
+                </a>
+
+                <ul class="submenu">
+                    <li>
+                        <a href="{{ route('admin.firms.list') }}"
+                            class="{{ request()->routeIs('admin.firms.*') ? 'active' : '' }}">
+                            <i class="bi bi-building"></i>
+                            <span>Firm</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('admin.asset.class.list') }}"
+                            class="{{ request()->routeIs('admin.asset.class.*') ? 'active' : '' }}">
+                            <i class="bi bi-boxes"></i>
+                            <span>Asset Class</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('admin.type.list') }}"
+                            class="{{ request()->routeIs('admin.type.*') ? 'active' : '' }}">
+                            <i class="bi bi-tags"></i>
+                            <span>Types</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('admin.strategie.list') }}"
+                            class="{{ request()->routeIs('admin.strategie.*') ? 'active' : '' }}">
+                            <i class="bi bi-lightning-fill"></i>
+                            <span>Strategies</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('admin.category.list') }}"
+                            class="{{ request()->routeIs('admin.category.*') ? 'active' : '' }}">
+                            <i class="bi bi-collection"></i>
+                            <span>Categories</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('admin.risk.rating.list') }}"
+                            class="{{ request()->routeIs('admin.risk.rating.*') ? 'active' : '' }}">
+                            <i class="bi bi-exclamation-triangle"></i>
+                            <span>Risk Rating</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+
+        <!-- ✅ Import Jobs as separate sidebar item -->
+        <a href="{{ route('admin.import-jobs.list') }}"
+            class="nav-item {{ request()->routeIs('admin.import-jobs.*') ? 'active' : '' }}">
+            <i class="nav-icon bi bi-upload"></i>
+            <span class="nav-label">Import Jobs</span>
+        </a>
+
+        <!-- ✅ End Import Jobs -->
+        <a href="{{ route('admin.import-job-rows.list') }}"
+            class="nav-item {{ request()->routeIs('admin.import-job-rows.*') ? 'active' : '' }}">
+           <i class="nav-icon bi bi-check2-square"></i>
+
+            <span class="nav-label">Import Job Row</span>
+        </a>
+
+        <a href="{{ route('admin.funds.list') }}"
+            class="nav-item {{ request()->routeIs('admin.funds.*') ? 'active' : '' }}">
+            <i class="nav-icon bi bi-wallet2"></i>
+            <span class="nav-label">Fund</span>
+        </a>
+
+        <a href="{{ route('admin.pages.list') }}"
+            class="nav-item {{ request()->routeIs('admin.pages.*') ? 'active' : '' }}">
+            <i class="nav-icon bi bi-file-text"></i>
+            <span class="nav-label">Page</span>
+        </a>
+
+        <!-- User Management -->
+        <a href="{{ route('admin.users.list') }}"
+            class="nav-item {{ request()->routeIs('admin.users.*') ? 'active' : '' }}">
+            <i class="nav-icon bi bi-people"></i>
+            <span class="nav-label">User Management</span>
+        </a>
+
+        <!-- Banner Management -->
+        <a href="{{ route('admin.banner.list') }}"
+            class="nav-item {{ request()->routeIs('admin.banner.*') ? 'active' : '' }}">
+            <i class="nav-icon bi bi-image"></i>
+            <span class="nav-label">Banner</span>
+        </a>
+        <!-- Contact Management -->
+        <a href="{{ route('admin.contact.list') }}"
+            class="nav-item {{ request()->routeIs('admin.contact.*') ? 'active' : '' }}">
+            <i class="nav-icon bi bi-envelope"></i>
+            <span class="nav-label">Contact</span>
+        </a>
+
+        <!-- newsLetter Management -->
+        <a href="{{ route('admin.newsletter-subscribe.list') }}"
+            class="nav-item {{ request()->routeIs('admin.newsletter-subscribe.*') ? 'active' : '' }}">
+            <i class="nav-icon bi bi-newspaper"></i>
+            <span class="nav-label">Newsletter Subscribe</span>
+        </a>
+
+        <div class="nav-section">Account</div>
+
+        <!-- Profile -->
+        <a href="{{ route('admin.profile') }}"
+            class="nav-item {{ request()->routeIs('admin.profile') ? 'active' : '' }}">
+            <i class="nav-icon bi bi-person"></i>
+            <span class="nav-label">Profile</span>
+        </a>
+
+        <!-- Change Password -->
+        <a href="{{ route('admin.password.change') }}" class="nav-item">
+            <i class="nav-icon bi bi-key"></i>
+            <span class="nav-label">Change Password</span>
+        </a>
+
+        <!-- Logout -->
+        <form method="POST" action="{{ route('admin.logout') }}" class="nav-item">
+            @csrf
+            <button type="submit" class="btn btn-link nav-link p-0 m-0 text-start">
+                <i class="nav-icon bi bi-box-arrow-right"></i>
+                <span class="nav-label">Logout</span>
+            </button>
+        </form>
+
+    </div>
+</aside>
