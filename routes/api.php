@@ -8,6 +8,8 @@ use App\Http\Controllers\Api\NewsLetterController;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\SettingController;
 use App\Http\Controllers\Api\BlogController;
+use App\Http\Controllers\Api\OurValueController;
+use App\Http\Controllers\Api\WebPageController;
 
 
 Route::post('/send-otp', [AuthController::class, 'sendOtp']);
@@ -29,6 +31,14 @@ Route::get('/settings', [SettingController::class, 'index']);
 Route::get('blogs', [BlogController::class, 'list']);
 Route::get('blogs/{slug}', [BlogController::class, 'details']);
 
+//Get Our Values
+Route::get('our-values', [OurValueController::class, 'list']);
+Route::get('our-values/{id}', [OurValueController::class, 'details']);
+
+//Get Web Pages
+Route::get('web-pages', [WebPageController::class, 'list']);
+
+// Protected Routes
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('/profile', [AuthController::class,'profile']);
     Route::post('/profile-update', [AuthController::class,'updateProfile']);

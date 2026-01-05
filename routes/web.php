@@ -19,6 +19,9 @@ use App\Http\Controllers\Admin\ContactController;
 use App\Http\Controllers\Admin\NewsLetterController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\BlogController;
+use App\Http\Controllers\Admin\AuthUserController;
+use App\Http\Controllers\Admin\OurValueController;
+use App\Http\Controllers\Admin\WebPageController;
 use Illuminate\Support\Facades\Artisan;
 
 Route::get('/', function () {
@@ -212,7 +215,37 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::delete('/destroy/{id}', [BlogController::class,'destroy'])->name('destroy');
             Route::get('/view/{id}', [BlogController::class,'show'])->name('show');
         });
-        /*---------------------------------End BlogController-----------------------------------------------*/
+        /*---------------------------------End BlogController------------------------------------------------*/
+
+        /*---------------------------------Auth User Controller----------------------------------------------*/
+         Route::prefix('auth-user')->name('auth.user.')->group(function () {
+            Route::get('/list', [AuthUserController::class,'index'])->name('list');            
+            Route::delete('/destroy/{id}', [AuthUserController::class,'destroy'])->name('destroy');
+        });
+        /*---------------------------------End Auth User Controller------------------------------------------*/
+
+        /*---------------------------------Our Value Controller----------------------------------------------*/
+         Route::prefix('our-value')->name('value.')->group(function () {
+            Route::get('/list', [OurValueController::class,'index'])->name('list');
+            Route::get('/add', [OurValueController::class,'create'])->name('create');
+            Route::post('/store', [OurValueController::class,'store'])->name('store');
+            Route::get('/edit/{id}', [OurValueController::class,'edit'])->name('edit');
+            Route::post('/update/{id}', [OurValueController::class,'update'])->name('update');
+            Route::delete('/destroy/{id}', [OurValueController::class,'destroy'])->name('destroy');
+            Route::get('/view/{id}', [OurValueController::class,'show'])->name('show');
+        });
+        /*---------------------------------End Our Value Controller------------------------------------------*/
+
+        /*---------------------------------Web Page Controller-----------------------------------------------*/
+         Route::prefix('web-pages')->name('web.page.')->group(function () {
+            Route::get('/list', [WebPageController::class,'index'])->name('list');
+            Route::get('/add', [WebPageController::class,'create'])->name('create');
+            Route::post('/store', [WebPageController::class,'store'])->name('store');
+            Route::get('/edit/{id}', [WebPageController::class,'edit'])->name('edit');
+            Route::post('/update/{id}', [WebPageController::class,'update'])->name('update');
+            Route::delete('/destroy/{id}', [WebPageController::class,'destroy'])->name('destroy');
+        });
+        /*---------------------------------End Web Page Controller-------------------------------------------*/
 
     });
 }); 

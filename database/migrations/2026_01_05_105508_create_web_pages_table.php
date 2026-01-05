@@ -11,9 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('news_letters', function (Blueprint $table) {
+        Schema::create('web_pages', function (Blueprint $table) {
             $table->id();
-            $table->string('email')->nullable(); 
+            $table->string('title');
+            $table->string('slug')->unique();             
+            $table->string('banner_image')->nullable();
+            $table->tinyInteger('status')->default(1)->comment('0 = InActive, 1 = Active');
             $table->timestamps();
         });
     }
@@ -23,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('news_letters');
+        Schema::dropIfExists('web_pages');
     }
 };

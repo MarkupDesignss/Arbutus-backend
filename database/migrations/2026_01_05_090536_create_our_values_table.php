@@ -11,9 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('news_letters', function (Blueprint $table) {
+        Schema::create('our_values', function (Blueprint $table) {
             $table->id();
-            $table->string('email')->nullable(); 
+            $table->string('title');
+             $table->string('image')->nullable();
+            $table->string('short_description', 500)->nullable();
+            $table->longText('long_description');  
+            $table->tinyInteger('status')->default(1)->comment('0 = InActive, 1 = Active');         
             $table->timestamps();
         });
     }
@@ -23,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('news_letters');
+        Schema::dropIfExists('our_values');
     }
 };

@@ -2,8 +2,8 @@
 @section('content')
 
 <div class="container mt-4">
-    <div class="d-flex justify-content-between align-items-center mb-3">
-        <h3 style="font-size: 1.5rem; color: #0d6efd;" class="mb-0 fw-bold">News Letters List</h3>
+    <div class="d-flex justify-content-between align-items-center mb-3 listing_name">
+        <h3 style="font-size: 1.5rem; color: #0d6efd;" class="mb-0 fw-bold">Auth User List</h3>
     </div>
 
     <div class="card shadow-sm">
@@ -12,20 +12,25 @@
                 <table class="table table-bordered">
                     <thead class="text-uppercase">
                         <tr>
-                            <th scope="col" style="width: 50px;  background-color: #f1f5f9;">#</th>
-                            <th scope="col" style="width: 150px;  background-color: #f1f5f9;">Email</th>
-                            <th scope="col" style="width: 100px;  background-color: #f1f5f9;">Action</th>
+                            <th>SN.</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Mobile</th>
+                            <th>Image</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @forelse($newsletters as $list)
-                            <tr>
-                                <td>{{ $loop->iteration }}</td>                                                              
-                                <td>{{ $list->email }}</td>
-                                
-                                <td>
-                                    <div class="d-flex gap-2">                                       
-                                    <form action="{{ route('admin.newsletter-subscribe.destroy', $list->id) }}" method="POST"
+                        @forelse($users as $u)
+                        <tr>
+                            <td>{{ $loop->iteration }}</td>
+                            <td>{{ $u->name ?? '-' }}</td>
+                            <td>{{ $u->email ?? '-' }}</td>                            
+                            <td>{{ $u->mobile ?? '-' }}</td>                            
+                            <td>{{ $u->image ?? '-' }}</td>                            
+                             <td>
+                                <div class="d-flex justify-content-center gap-2">
+                                    <form action="{{ route('admin.auth.user.destroy',$u->id) }}" method="POST"
                                         class="delete-form">
                                         @csrf
                                         @method('DELETE')
@@ -33,15 +38,18 @@
                                             <i class="fas fa-trash"></i>
                                         </button>
                                     </form>
-                                    </div>
-                                </td>
-                            </tr>
+                                </div>
+                            </td>
+                        </tr>
                         @empty
-                            <tr><td colspan="5" class="text-center">No newsletters found.</td></tr>
+                        <tr><td colspan="6" class="text-center">No auth users found</td></tr>
                         @endforelse
                     </tbody>
                 </table>
-                <div class="mt-3">{{ $newsletters->links('pagination::bootstrap-5') }}</div>
+
+                <div class="mt-3">
+                    {{ $users->links('pagination::bootstrap-5') }}
+                </div>
             </div>
         </div>
     </div>
