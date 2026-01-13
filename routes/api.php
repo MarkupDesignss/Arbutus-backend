@@ -10,7 +10,9 @@ use App\Http\Controllers\Api\SettingController;
 use App\Http\Controllers\Api\BlogController;
 use App\Http\Controllers\Api\OurValueController;
 use App\Http\Controllers\Api\WebPageController;
-
+use App\Http\Controllers\Api\PageController;
+use App\Http\Controllers\Api\SubscriptionController;
+use App\Http\Controllers\Api\SubscriptionPurchaseController;
 
 Route::post('/send-otp', [AuthController::class, 'sendOtp']);
 Route::post('/verify-otp', [AuthController::class, 'verifyOtp']);
@@ -38,10 +40,21 @@ Route::get('our-values/{id}', [OurValueController::class, 'details']);
 //Get Web Pages
 Route::get('web-pages', [WebPageController::class, 'list']);
 
+//Get single page by slug
+Route::get('pages/{slug}', [PageController::class, 'index']);
+
+//Get Subscriptions
+Route::get('subscriptions', [SubscriptionController::class, 'index']);
+Route::get('subscriptions/{id}', [SubscriptionController::class, 'show']);
+
 // Protected Routes
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('/profile', [AuthController::class,'profile']);
     Route::post('/profile-update', [AuthController::class,'updateProfile']);
     Route::post('/logout', [AuthController::class,'logout']);
     Route::post('/delete-account', [AuthController::class, 'deleteAccount']);
+    //SUBSCRIPTION PURCHASE API
+    Route::post('/subscribe', [SubscriptionPurchaseController::class,'subscribe']);
 });
+
+Route::post('/stripe/webhook', [SubscriptionPurchaseController::class,'stripeWebhook']);

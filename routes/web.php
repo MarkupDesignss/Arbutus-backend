@@ -22,6 +22,9 @@ use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\Admin\AuthUserController;
 use App\Http\Controllers\Admin\OurValueController;
 use App\Http\Controllers\Admin\WebPageController;
+use App\Http\Controllers\Admin\SubscriptionController;
+use App\Http\Controllers\Admin\AccessRuleController;
+use App\Http\Controllers\Admin\PlanAccessController;
 use Illuminate\Support\Facades\Artisan;
 
 Route::get('/', function () {
@@ -246,6 +249,43 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::delete('/destroy/{id}', [WebPageController::class,'destroy'])->name('destroy');
         });
         /*---------------------------------End Web Page Controller-------------------------------------------*/
+
+        /*---------------------------------Subscription Controller-------------------------------------------*/
+        Route::prefix('subscription')->name('subscriptions.')->group(function () {
+            Route::get('/list', [SubscriptionController::class, 'index'])->name('list');
+            Route::get('/add', [SubscriptionController::class, 'create'])->name('create');
+            Route::post('/create', [SubscriptionController::class, 'store'])->name('store');
+            Route::get('/edit/{id}', [SubscriptionController::class, 'edit'])->name('edit');
+            Route::put('/update/{id}', [SubscriptionController::class, 'update'])->name('update');
+            Route::delete('/destroy/{id}', [SubscriptionController::class, 'destroy'])->name('destroy');
+            Route::get('/view/{id}', [SubscriptionController::class,'show'])->name('show');
+
+        });
+        /*---------------------------------End Subscription Controller--------------------------------------*/
+
+        /*---------------------------------Access Rule Controller-------------------------------------------*/
+        Route::prefix('access-rule')->name('access.rule.')->group(function () {
+            Route::get('/list', [AccessRuleController::class, 'index'])->name('list');
+            Route::get('/add', [AccessRuleController::class, 'create'])->name('create');
+            Route::post('/create', [AccessRuleController::class, 'store'])->name('store');
+            Route::get('/edit/{id}', [AccessRuleController::class, 'edit'])->name('edit');
+            Route::put('/update/{id}', [AccessRuleController::class, 'update'])->name('update');
+            Route::delete('/destroy/{id}', [AccessRuleController::class, 'destroy'])->name('destroy');
+            Route::get('/view/{id}', [AccessRuleController::class,'show'])->name('show');
+        });
+        /*---------------------------------End Access Rule Controller--------------------------------------*/
+
+        /*---------------------------------Plan Access Controller------------------------------------------*/
+        Route::prefix('plan-access')->name('plan.access.')->group(function () {
+            Route::get('/list', [PlanAccessController::class, 'index'])->name('list');
+            Route::get('/add', [PlanAccessController::class, 'create'])->name('create');
+            Route::post('/create', [PlanAccessController::class, 'store'])->name('store');
+            Route::get('/edit/{id}', [PlanAccessController::class, 'edit'])->name('edit');
+            Route::put('/update/{id}', [PlanAccessController::class, 'update'])->name('update');
+            Route::delete('/destroy/{id}', [PlanAccessController::class, 'destroy'])->name('destroy');
+            Route::get('/view/{id}', [PlanAccessController::class,'show'])->name('show');
+        });
+        /*---------------------------------End Plan Access Controller--------------------------------------*/
 
     });
 }); 
