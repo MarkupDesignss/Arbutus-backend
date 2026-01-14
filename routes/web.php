@@ -164,6 +164,12 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::post('/store', [ImportJobController::class,'store'])->name('store');
             Route::delete('/destroy/{id}', [ImportJobController::class,'destroy'])->name('destroy');
             Route::get('/view/{id}', [ImportJobController::class,'show'])->name('show');
+            Route::get('import-jobs/sample-download', function () {
+                        return response()->download(
+                            storage_path('app/public/sample.xlsx'),
+                            'sample.xlsx'
+                        );
+                    })->name('sample-download');
         });
         /*---------------------------------End Import Job Controller------------------------------------------*/
 

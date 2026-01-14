@@ -98,6 +98,12 @@
             <span class="nav-label">Subscriptions</span>
         </a>
 
+        <a href="{{ route('admin.users.list') }}"
+            class="nav-item {{ request()->routeIs('admin.users.*') ? 'active' : '' }}">
+            <i class="nav-icon bi bi-people"></i>
+            <span class="nav-label">User Management</span>
+        </a>
+
         <!-- Freemium Gating -->
         <ul>
             <li

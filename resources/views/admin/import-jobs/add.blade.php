@@ -30,8 +30,14 @@
                         <label>Upload File (CSV / Excel)</label>
                         <input type="file" name="csv_file" class="form-control" accept=".csv,.xlsx,.xls" required>
                         @error('csv_file') <small class="text-danger">{{ $message }}</small> @enderror
-                    </div>
 
+                        <div class="mt-2">
+                            <a href="{{ route('admin.import-jobs.sample-download') }}"
+                                class="text-decoration-none small fw-semibold text-primary">
+                                <i class="bi bi-download me-1"></i> Download Sample Excel
+                            </a>
+                        </div>
+                    </div>
 
                     <div class="col-md-4 mb-3">
                         <label>Status</label>
