@@ -54,7 +54,11 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/logout', [AuthController::class,'logout']);
     Route::post('/delete-account', [AuthController::class, 'deleteAccount']);
     //SUBSCRIPTION PURCHASE API
-    Route::post('/subscribe', [SubscriptionPurchaseController::class,'subscribe']);
+    // Route::post('/subscribe-payment', [SubscriptionPurchaseController::class,'subscribe']);
+    Route::post('/subscribe-payment', [SubscriptionPurchaseController::class,'subscribe']);
+    // Route::get('/payment-success', [SubscriptionPurchaseController::class,'success']);
 });
+
+Route::get('/payment-success', [SubscriptionPurchaseController::class,'success']);
 
 Route::post('/stripe/webhook', [SubscriptionPurchaseController::class,'stripeWebhook']);

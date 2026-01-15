@@ -91,6 +91,12 @@
             <i class="nav-icon bi bi-check2-square"></i>
             <span class="nav-label">Import Job Row</span>
         </a>
+
+        <a href="{{ route('admin.validated-import-row.list') }}"
+            class="nav-item {{ request()->routeIs('admin.validated-import-row.*') ? 'active' : '' }}">
+            <i class="nav-icon bi bi-file-check"></i>
+            <span class="nav-label">Validated Rows</span>
+        </a>
         <!-- Subscriptions -->
         <a href="{{ route('admin.subscriptions.list') }}"
             class="nav-item {{ request()->routeIs('admin.subscriptions.*') ? 'active' : '' }}">

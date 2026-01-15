@@ -25,6 +25,7 @@ use App\Http\Controllers\Admin\WebPageController;
 use App\Http\Controllers\Admin\SubscriptionController;
 use App\Http\Controllers\Admin\AccessRuleController;
 use App\Http\Controllers\Admin\PlanAccessController;
+use App\Http\Controllers\Admin\ValidatedImportRowController;
 use Illuminate\Support\Facades\Artisan;
 
 Route::get('/', function () {
@@ -179,6 +180,14 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::get('/view/{id}',[ImportJobRowController::class,'show'])->name('show');
         });
         /*---------------------------------End Import Job Controller------------------------------------------*/
+
+        /*---------------------------------Validated-Import-Row Controller------------------------------------*/
+        Route::prefix('validated-import-row')->name('validated-import-row.')->group(function(){
+            Route::get('/',[ValidatedImportRowController::class,'index'])->name('list');
+            Route::get('/view/{id}',[ValidatedImportRowController::class,'show'])->name('show');
+            Route::delete('/delete/{id}',[ValidatedImportRowController::class,'destroy'])->name('destroy');
+        });
+        /*---------------------------------End Validated-Import-Row Controller--------------------------------*/
 
         /*---------------------------------Banner Controller--------------------------------------------------*/
         Route::prefix('banner')->name('banner.')->group(function () {
