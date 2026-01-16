@@ -12,7 +12,8 @@
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead class="text-uppercase">
                         <tr>
-                            <th scope="col" style="width: 50px;  background-color: #f1f5f9;">SN.</th>                           
+                            <th scope="col" style="width: 50px;  background-color: #f1f5f9;">SN.</th>
+                            <th scope="col" style="width: 200px; background-color: #f1f5f9;">Fund Name</th>                           
                             <th scope="col" style="width: 200px; background-color: #f1f5f9;">Fundata Key</th>
                             <th scope="col" style="width: 200px; background-color: #f1f5f9;">Month End</th>
                             <th scope="col" style="width: 200px; background-color: #f1f5f9;">Monthly Return</th>
@@ -23,7 +24,8 @@
                     <tbody>
                         @forelse($rows as $list)
                         <tr>
-                            <td>{{ $loop->iteration }}</td>                            
+                            <td>{{ $loop->iteration }}</td>
+                            <td>{{ $list->fund->fund_name ?? 'N/A' }}</td>                            
                             <td>{{ $list->fundatakey  }}</td>
                             <td>{{ $list->month_end  }}</td>
                             <td>{{ $list->monthly_return  }}</td>

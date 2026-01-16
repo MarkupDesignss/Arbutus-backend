@@ -11,6 +11,8 @@ use App\Models\Type;
 use App\Models\Strategie;
 use App\Models\Category;
 use App\Models\RiskRating;
+use App\Models\FundMonthlyReturn;
+use App\Models\ImportJobRow;
 
 class FundController extends Controller
 {
@@ -115,6 +117,14 @@ class FundController extends Controller
     public function destroy($id)
     {
         $fund = Fund::findOrFail($id);
+        
+        // Delete related records from ImportJobRow table
+        ImportJobRow::where('fundatakey', $fund->fundatakey)->delete();
+        
+        // Delete related records from FundMonthlyReturn table
+        FundMonthlyReturn::where('fund_id', $fund->id)->delete();
+        
+        // Delete the fund
         $fund->delete();
 
         return redirect()->route('admin.funds.list')->with('success', 'Fund deleted successfully!');
