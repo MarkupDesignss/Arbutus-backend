@@ -79,6 +79,12 @@
             <span class="nav-label">Fund</span>
         </a>
 
+        <a href="{{ route('admin.fund.performance.list') }}"
+            class="nav-item {{ request()->routeIs('admin.fund.performance.*') ? 'active' : '' }}">
+            <i class="nav-icon bi bi-bar-chart-line"></i>
+            <span class="nav-label">Fund Performance</span>
+        </a>
+
         <!-- Import Jobs -->
         <a href="{{ route('admin.import-jobs.list') }}"
             class="nav-item {{ request()->routeIs('admin.import-jobs.*') ? 'active' : '' }}">

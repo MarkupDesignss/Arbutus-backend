@@ -26,6 +26,7 @@ use App\Http\Controllers\Admin\SubscriptionController;
 use App\Http\Controllers\Admin\AccessRuleController;
 use App\Http\Controllers\Admin\PlanAccessController;
 use App\Http\Controllers\Admin\ValidatedImportRowController;
+use App\Http\Controllers\Admin\FundPerformanceSnapshotController;
 use Illuminate\Support\Facades\Artisan;
 
 Route::get('/', function () {
@@ -301,6 +302,14 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::get('/view/{id}', [PlanAccessController::class,'show'])->name('show');
         });
         /*---------------------------------End Plan Access Controller--------------------------------------*/
+
+        /*---------------------------------Fund Performance Snapshot-------------------------------------*/
+        Route::prefix('fund-performance-snapshots')->name('fund.performance.')->group(function () {
+            Route::get('/list', [FundPerformanceSnapshotController::class, 'index'])->name('list');
+            Route::get('/months/{fund}', [FundPerformanceSnapshotController::class, 'months'])->name('months');
+            Route::post('/calculate', [FundPerformanceSnapshotController::class, 'store'])->name('store');
+        });
+        /*---------------------------------End Fund Performance Snapshot---------------------------------*/
 
     });
 }); 

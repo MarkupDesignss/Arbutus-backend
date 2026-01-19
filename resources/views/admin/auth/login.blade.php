@@ -2,155 +2,12 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Admin Login</title>
-    <link rel="icon" href="{{ asset('assets/img/AltDB Main Logo.png') }}" type="image/png">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login Form</title>
+    <link rel="stylesheet" href="{{ asset('assets/admin-login/style.css') }}">
     <style>
-    :root {
-        --accent1: #6A11CB;
-        --accent2: #2575FC;
-        --card-bg: #87CEEB;
-        --input-bg: rgba(255, 255, 255, 0.96);
-        --btn-bg: #FFD700;
-    }
-
-    * {
-        box-sizing: border-box
-    }
-
-    body {
-        margin: 0;
-        font-family: Arial, sans-serif;
-        /* background: linear-gradient(135deg,var(--accent1) 0%,var(--accent2) 100%); */
-        background-image: url('{{ asset('assets/img/5072609.png') }}');
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        height: 100vh;
-        padding: 20px;
-        overflow: hidden;
-        background-size: cover;
-        background-position: center;
-    }
-
-    .login-box {
-        width: 420px;
-        background: linear-gradient(135deg, #d4145a, #2b2f77);
-        border-radius: 12px;
-        padding: 34px;
-        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.18);
-        text-align: center;
-    }
-
-    .login-box img {
-        width: 78px;
-        height: 78px;
-        border-radius: 50%;
-        object-fit: cover;
-        margin-bottom: 14px;
-        border: 4px solid rgba(255, 255, 255, 0.25);
-    }
-
-    .login-box h2 {
-        color: #fff;
-        margin: 0 0 22px;
-        font-weight: 700;
-    }
-
-    .input-group {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        background: var(--input-bg);
-        border-radius: 10px;
-        padding: 10px 12px;
-        margin-bottom: 14px;
-        box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.04);
-        transition: box-shadow 0.18s ease, transform 0.12s ease;
-    }
-
-    .input-group:focus-within {
-        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
-        transform: translateY(-2px);
-    }
-
-    .input-group .input-icon {
-        width: 36px;
-        height: 36px;
-        border-radius: 8px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 16px;
-        color: #6b7280;
-        background: rgba(0, 0, 0, 0.03);
-        flex: 0 0 36px;
-    }
-
-    .input-group input {
-        border: 0;
-        background: transparent;
-        outline: none;
-        font-size: 15px;
-        width: 100%;
-        color: #222;
-        padding: 6px 0;
-    }
-
-    .input-group input::placeholder {
-        color: #7b7f86;
-    }
-
-    .remember-forgot {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        color: #fff;
-        font-size: 14px;
-        margin: 10px 0 18px;
-    }
-
-    .login-box .login-now {
-        display: inline-block;
-        width: 100%;
-        padding: 12px;
-        background: var(--btn-bg);
-        color: #222;
-        text-decoration: none;
-        border-radius: 8px;
-        font-size: 17px;
-        font-weight: 700;
-        border: 0;
-        cursor: pointer;
-        transition: background-color 0.18s ease, color 0.18s ease;
-    }
-
-    .login-box .login-now:hover {
-        background: #000;
-        color: #fff;
-    }
-
-    .signup {
-        margin-top: 12px;
-        color: #fff;
-        font-size: 14px;
-    }
-
-    .signup a {
-        color: #fff;
-        text-decoration: underline;
-    }
-
-    @media (max-width:480px) {
-        .login-box {
-            width: 100%;
-            padding: 22px;
-        }
-    }
-
-    .footer {
+        .footer {
         position: absolute;
         bottom: 10px;
         right: 20px;
@@ -162,40 +19,98 @@
         color: #007bff;
         text-decoration: none;
     }
+    .footer a:hover {
+        text-decoration: underline;
+    }
     </style>
 </head>
 
 <body>
-    <div class="login-box">
-        <img src="{{ asset('assets/img/AltDB Main Logo.png') }}" alt="User Icon">
-        <h2>Admin Login</h2>
-
-        <form method="POST" action="{{ route('admin.login.submit') }}">
-            @csrf
-            <div class="input-group">
-                <span class="input-icon"><i class="fas fa-envelope"></i></span>
-                <input type="email" name="email" placeholder="Email" required autofocus>
+    <div class="login-container">
+        <div class="login-card">
+            <div class="login-header">
+                <div class="neu-icon">
+                    <div class="icon-inner">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                            <circle cx="12" cy="7" r="4" />
+                        </svg>
+                    </div>
+                </div>
+                <h2>Welcome back</h2>
+                <p>Please sign in to continue</p>
             </div>
 
-            <div class="input-group">
-                <span class="input-icon"><i class="fas fa-lock"></i></span>
-                <input type="password" name="password" placeholder="Password" required>
-            </div>
+            <form method="POST" action="{{ route('admin.login.submit') }}" class="login-form" id="loginForm" novalidate>
+                @csrf
+                <div class="form-group">
+                    <div class="input-group neu-input">
+                        <input type="email" id="email" name="email" required autocomplete="email" placeholder=" ">
+                        <label for="email">Email address</label>
+                        <div class="input-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                                <polyline points="22,6 12,13 2,6" />
+                            </svg>
+                        </div>
+                    </div>
+                    <span class="error-message" id="emailError"></span>
+                </div>
 
-            <div class="remember-forgot">
-                <label style="display:flex;align-items:center;gap:6px;color:#fff;font-weight:500;">
-                    <input type="checkbox" name="remember" style="transform:scale(1.05)" /> Remember me
-                </label>
-            </div>
+                <div class="form-group">
+                    <div class="input-group neu-input password-group">
+                        <input type="password" id="password" name="password" required autocomplete="current-password"
+                            placeholder=" ">
+                        <label for="password">Password</label>
+                        <div class="input-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+                                <path d="M7 11V7a5 5 0 0110 0v4" />
+                            </svg>
+                        </div>
+                        <button type="button" class="password-toggle neu-toggle" id="passwordToggle"
+                            aria-label="Toggle password visibility">
+                            <svg class="eye-open" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                                <circle cx="12" cy="12" r="3" />
+                            </svg>
+                            <svg class="eye-closed" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path
+                                    d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24" />
+                                <line x1="1" y1="1" x2="23" y2="23" />
+                            </svg>
+                        </button>
+                    </div>
+                    <span class="error-message" id="passwordError"></span>
+                </div>
 
-            <button type="submit" class="login-now">Login Now</button>
-        </form>
+                <div class="form-options">
+                    <div class="remember-wrapper">
+                        <input type="checkbox" id="remember" name="remember">
+                        <label for="remember" class="checkbox-label">
+                            <div class="neu-checkbox">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                                    <polyline points="20 6 9 17 4 12" />
+                                </svg>
+                            </div>
+                            Remember me
+                        </label>
+                    </div>                    
+                </div>
 
-        <div class="signup">
-            Click here to return:&nbsp;<a href="/" style="text-decoration: underline; color: #007bff;">Back</a>
+                <button type="submit" class="neu-button login-btn">
+                    <span class="btn-text">Sign In</span>
+                    <div class="btn-loader">
+                        <div class="neu-spinner"></div>
+                    </div>
+                </button>
+            </form> 
+                    
         </div>
     </div>
-    <div class="footer">
+<div class="footer">
         <strong>
             © 2025, made with ❤️ by
             <a href="https://www.markupdesigns.com/" target="_blank">Markup Design</a>.
@@ -203,6 +118,9 @@
         All rights reserved.
         <a href="{{ url('/') }}">Back</a>
     </div>
+    <script src="../../shared/js/form-utils.js"></script>
+    <!-- <script src="script.js"></script> -->
+    <script src="{{ asset('assets/admin-login/script.js') }}"></script>
 </body>
 
 </html>
