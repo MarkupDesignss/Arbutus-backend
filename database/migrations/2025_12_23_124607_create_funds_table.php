@@ -25,17 +25,6 @@ return new class extends Migration
             $table->foreignId('category_id')->constrained('categories')->onDelete('cascade'); 
             $table->foreignId('risk_rating_id')->constrained('risk_ratings')->onDelete('cascade'); 
 
-            // Performance metrics
-            $table->decimal('one_month', 6, 2)->nullable();        // 1 Month %
-            $table->decimal('ytd', 6, 2)->nullable();              // YTD %
-            $table->decimal('one_year', 6, 2)->nullable();         // 1 Year %
-            $table->decimal('three_year', 6, 2)->nullable();       // 3 Year annualized %
-            $table->decimal('since_inception', 6, 2)->nullable(); // SI %
-            // Risk & yield
-            $table->decimal('three_year_std_dev', 6, 2)->nullable();
-            $table->decimal('distribution_yield', 6, 2)->nullable();
-            // Dates & AUM
-            $table->date('inception_date')->nullable();
             $table->decimal('fund_aum', 12, 2)->nullable();
             // External links
             $table->text('fund_library_link')->nullable();

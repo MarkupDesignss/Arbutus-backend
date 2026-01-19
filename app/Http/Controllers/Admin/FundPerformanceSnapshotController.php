@@ -13,9 +13,15 @@ class FundPerformanceSnapshotController extends Controller
     // Show the page with form and listing
     public function index()
     {
-        $funds = Fund::orderBy('fund_name')->get();
+        // Build fund options based on what's present in fund_monthly_returns
+        $fundOptions = FundMonthlyReturn::with('fund')
+            ->select('fund_id', 'fundatakey')
+            ->groupBy('fund_id', 'fundatakey')
+            ->orderBy('fundatakey')
+            ->get();
+
         $snapshots = FundPerformanceSnapshot::with('fund')->orderByDesc('id')->get();
-        return view('admin.fund_performance_snapshots.index', compact('funds', 'snapshots'));
+        return view('admin.fund_performance_snapshots.index', compact('fundOptions', 'snapshots'));
     }
 
     // Return monthly returns for a fund (AJAX)
