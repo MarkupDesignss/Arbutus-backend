@@ -306,8 +306,11 @@ Route::prefix('admin')->name('admin.')->group(function () {
         /*---------------------------------Fund Performance Snapshot-------------------------------------*/
         Route::prefix('fund-performance-snapshots')->name('fund.performance.')->group(function () {
             Route::get('/list', [FundPerformanceSnapshotController::class, 'index'])->name('list');
+            Route::get('/view/{id}', [FundPerformanceSnapshotController::class, 'show'])->name('view');
+            Route::post('/toggle/{id}', [FundPerformanceSnapshotController::class, 'toggle'])->name('toggle');
             Route::get('/months/{fund}', [FundPerformanceSnapshotController::class, 'months'])->name('months');
             Route::post('/calculate', [FundPerformanceSnapshotController::class, 'store'])->name('store');
+            Route::delete('/destroy/{id}', [FundPerformanceSnapshotController::class, 'destroy'])->name('destroy');
         });
         /*---------------------------------End Fund Performance Snapshot---------------------------------*/
 

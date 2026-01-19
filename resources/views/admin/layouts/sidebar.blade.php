@@ -79,12 +79,6 @@
             <span class="nav-label">Fund</span>
         </a>
 
-        <a href="{{ route('admin.fund.performance.list') }}"
-            class="nav-item {{ request()->routeIs('admin.fund.performance.*') ? 'active' : '' }}">
-            <i class="nav-icon bi bi-bar-chart-line"></i>
-            <span class="nav-label">Fund Performance</span>
-        </a>
-
         <!-- Import Jobs -->
         <a href="{{ route('admin.import-jobs.list') }}"
             class="nav-item {{ request()->routeIs('admin.import-jobs.*') ? 'active' : '' }}">
@@ -101,8 +95,15 @@
         <a href="{{ route('admin.validated-import-row.list') }}"
             class="nav-item {{ request()->routeIs('admin.validated-import-row.*') ? 'active' : '' }}">
             <i class="nav-icon bi bi-file-check"></i>
-            <span class="nav-label">Validated Rows</span>
+            <span class="nav-label">Montly Rows</span>
         </a>
+        
+        <a href="{{ route('admin.fund.performance.list') }}"
+            class="nav-item {{ request()->routeIs('admin.fund.performance.*') ? 'active' : '' }}">
+            <i class="nav-icon bi bi-bar-chart-line"></i>
+            <span class="nav-label">Fund Snapshots</span>
+        </a>
+        
         <!-- Subscriptions -->
         <a href="{{ route('admin.subscriptions.list') }}"
             class="nav-item {{ request()->routeIs('admin.subscriptions.*') ? 'active' : '' }}">
