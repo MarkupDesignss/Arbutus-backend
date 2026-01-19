@@ -44,8 +44,8 @@
             <form method="POST" action="{{ route('admin.login.submit') }}" class="login-form" id="loginForm" novalidate>
                 @csrf
                 <div class="form-group">
-                    <div class="input-group neu-input">
-                        <input type="email" id="email" name="email" required autocomplete="email" placeholder=" ">
+                    <div class="input-group neu-input {{ old('email') ? 'has-value' : '' }}">
+                        <input type="email" id="email" name="email" required autocomplete="email" placeholder=" " value="{{ old('email') }}">
                         <label for="email">Email address</label>
                         <div class="input-icon">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -54,11 +54,11 @@
                             </svg>
                         </div>
                     </div>
-                    <span class="error-message" id="emailError"></span>
+                    <span class="error-message {{ session('error') || $errors->has('email') ? 'show' : '' }}" id="emailError">{{ session('error') ?? $errors->first('email') }}</span>
                 </div>
 
                 <div class="form-group">
-                    <div class="input-group neu-input password-group">
+                    <div class="input-group neu-input password-group {{ old('password') ? 'has-value' : '' }}">
                         <input type="password" id="password" name="password" required autocomplete="current-password"
                             placeholder=" ">
                         <label for="password">Password</label>
@@ -83,12 +83,12 @@
                             </svg>
                         </button>
                     </div>
-                    <span class="error-message" id="passwordError"></span>
+                    <span class="error-message" id="passwordError">@error('password'){{ $message }}@enderror</span>
                 </div>
 
                 <div class="form-options">
                     <div class="remember-wrapper">
-                        <input type="checkbox" id="remember" name="remember">
+                        <input type="checkbox" id="remember" name="remember" {{ old('remember') ? 'checked' : '' }}>
                         <label for="remember" class="checkbox-label">
                             <div class="neu-checkbox">
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
@@ -112,7 +112,7 @@
     </div>
 <div class="footer">
         <strong>
-            © 2025, made with ❤️ by
+            © 2026, made with ❤️ by
             <a href="https://www.markupdesigns.com/" target="_blank">Markup Design</a>.
         </strong>
         All rights reserved.

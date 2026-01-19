@@ -17,6 +17,7 @@ class NeumorphismLoginForm {
         this.setupPasswordToggle();
         this.setupSocialButtons();
         this.setupNeumorphicEffects();
+        this.setupFloatingLabels();
     }
     
     bindEvents() {
@@ -25,12 +26,38 @@ class NeumorphismLoginForm {
         this.passwordInput.addEventListener('blur', () => this.validatePassword());
         this.emailInput.addEventListener('input', () => this.clearError('email'));
         this.passwordInput.addEventListener('input', () => this.clearError('password'));
+        // Keep label state in sync while typing
+        this.emailInput.addEventListener('input', () => this.updateLabelState(this.emailInput));
+        this.passwordInput.addEventListener('input', () => this.updateLabelState(this.passwordInput));
         
         // Add soft press effects to inputs
         [this.emailInput, this.passwordInput].forEach(input => {
             input.addEventListener('focus', (e) => this.addSoftPress(e));
             input.addEventListener('blur', (e) => this.removeSoftPress(e));
         });
+    }
+
+    setupFloatingLabels() {
+        // Initialize label positions based on current values
+        this.updateLabelState(this.emailInput);
+        this.updateLabelState(this.passwordInput);
+
+        // Also handle focus/blur to animate
+        [this.emailInput, this.passwordInput].forEach(input => {
+            input.addEventListener('blur', () => this.updateLabelState(input));
+        });
+    }
+
+    updateLabelState(input) {
+        try {
+            const ng = input.closest('.neu-input');
+            if (!ng) return;
+            if ((input.value || '').toString().trim().length > 0) {
+                ng.classList.add('has-value');
+            } else {
+                ng.classList.remove('has-value');
+            }
+        } catch (e) { /* ignore */ }
     }
     
     setupPasswordToggle() {
@@ -192,19 +219,9 @@ class NeumorphismLoginForm {
             return;
         }
         
+        // Submit immediately (skip welcome animation)
         this.setLoading(true);
-        
-        try {
-            // Show neumorphic success animation
-            this.showNeumorphicSuccess();
-            
-            // Submit form after showing success animation
-            await new Promise(resolve => setTimeout(resolve, 1500));
-            this.form.submit();
-        } catch (error) {
-            this.showError('password', 'Login failed. Please try again.');
-            this.setLoading(false);
-        }
+        this.form.submit();
     }
     
     async handleSocialLogin(provider, button) {
