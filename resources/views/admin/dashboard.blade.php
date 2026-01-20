@@ -16,11 +16,11 @@
             <div class="absolute top-0 right-0 w-24 h-24 bg-white/10 rounded-full -mr-12 -mt-12"></div>
 
             <div class="flex items-center justify-between">
-                <h3 class="text-lg font-semibold text-white">Active Users</h3>
+                <h3 class="text-lg font-semibold text-white">Total Users</h3>
                 <i class="bi bi-person-check text-white text-xl"></i>
             </div>
 
-            <p class="text-4xl font-bold mt-4 text-white">3</p>
+            <p class="text-4xl font-bold mt-4 text-white">{{ $users }}</p>
             <p class="text-sm text-white/80 mt-2">Currently active users</p>
         </div>
 
@@ -29,12 +29,12 @@
             <div class="absolute top-0 right-0 w-24 h-24 bg-white/10 rounded-full -mr-12 -mt-12"></div>
 
             <div class="flex items-center justify-between">
-                <h3 class="text-lg font-semibold text-white">Inactive Users</h3>
-                <i class="bi bi-person-x text-white text-xl"></i>
+                <h3 class="text-lg font-semibold text-white">Total Subscription</h3>
+                <i class="bi bi-person-check-fill text-white text-xl"></i>
             </div>
 
-            <p class="text-4xl font-bold mt-4 text-white">2</p>
-            <p class="text-sm text-white/80 mt-2">Blocked / inactive users</p>
+            <p class="text-4xl font-bold mt-4 text-white">{{ $subscription }}</p>
+            <p class="text-sm text-white/80 mt-2">Currently Subscription users</p>
         </div>
 
         {{-- Total Categories --}}
@@ -42,12 +42,13 @@
             <div class="absolute top-0 right-0 w-24 h-24 bg-white/10 rounded-full -mr-12 -mt-12"></div>
 
             <div class="flex items-center justify-between">
-                <h3 class="text-lg font-semibold text-white">Categories</h3>
-                <i class="bi bi-folder2-open text-white text-xl"></i>
+                <h3 class="text-lg font-semibold text-white">Total Contact Us</h3>
+                <i class="bi bi-people-fill text-white text-xl"></i>
+
             </div>
 
-            <p class="text-4xl font-bold mt-4 text-white">5</p>
-            <p class="text-sm text-white/80 mt-2">Total catalog categories</p>
+            <p class="text-4xl font-bold mt-4 text-white">{{ $contacts }}</p>
+            <p class="text-sm text-white/80 mt-2">Currently Contact Us</p>
         </div>
 
         {{-- Total Items --}}
@@ -55,12 +56,12 @@
             <div class="absolute top-0 right-0 w-24 h-24 bg-white/10 rounded-full -mr-12 -mt-12"></div>
 
             <div class="flex items-center justify-between">
-                <h3 class="text-lg font-semibold text-white">Items</h3>
+                <h3 class="text-lg font-semibold text-white">Total Fund</h3>
                 <i class="bi bi-box-seam text-white text-xl"></i>
             </div>
 
-            <p class="text-4xl font-bold mt-4 text-white">5</p>
-            <p class="text-sm text-white/80 mt-2">Total catalog items</p>
+            <p class="text-4xl font-bold mt-4 text-white">{{ $funds }}</p>
+            <p class="text-sm text-white/80 mt-2">Currently Funds</p>
         </div>
 
     </div>

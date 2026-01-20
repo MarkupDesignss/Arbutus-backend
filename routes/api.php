@@ -13,6 +13,12 @@ use App\Http\Controllers\Api\WebPageController;
 use App\Http\Controllers\Api\PageController;
 use App\Http\Controllers\Api\SubscriptionController;
 use App\Http\Controllers\Api\SubscriptionPurchaseController;
+use App\Http\Controllers\Api\AssetClassController;
+use App\Http\Controllers\Api\CategoryController;
+use App\Http\Controllers\Api\StrategyController;
+use App\Http\Controllers\Api\TypeController;
+use App\Http\Controllers\Api\FundController;
+
 
 Route::post('/send-otp', [AuthController::class, 'sendOtp']);
 Route::post('/verify-otp', [AuthController::class, 'verifyOtp']);
@@ -46,6 +52,22 @@ Route::get('pages/{slug}', [PageController::class, 'index']);
 //Get Subscriptions
 Route::get('subscriptions', [SubscriptionController::class, 'index']);
 Route::get('subscriptions/{id}', [SubscriptionController::class, 'show']);
+
+//Get Asset Classes
+Route::get('asset-classes', [AssetClassController::class, 'index']);
+
+//Get Categories
+Route::get('categories', [CategoryController::class, 'index']);
+
+//Get Strategies
+Route::get('strategies', [StrategyController::class, 'index']);
+
+//Get Types
+Route::get('types', [TypeController::class, 'index']);
+
+//Get Funds
+Route::get('funds', [FundController::class, 'index']);
+Route::get('filter-funds', [FundController::class, 'filterData']);
 
 // Protected Routes
 Route::middleware('auth:sanctum')->group(function () {
