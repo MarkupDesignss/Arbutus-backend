@@ -64,20 +64,7 @@
             <div class="card mb-4">
                 <div class="card-header bg-secondary text-white">
                     <h6 class="mb-0">Performance Metrics (%)</h6>
-                </div>
-                <div class="card-body">
-                    <div class="row g-3">
-                        <div class="col-md-3"><strong>1 Month:</strong> <span class="text-muted">{{ $fund->one_month ?? '-' }}</span></div>
-                        <div class="col-md-3"><strong>YTD:</strong> <span class="text-muted">{{ $fund->ytd ?? '-' }}</span></div>
-                        <div class="col-md-3"><strong>1 Year:</strong> <span class="text-muted">{{ $fund->one_year ?? '-' }}</span></div>
-                        <div class="col-md-3"><strong>3 Year:</strong> <span class="text-muted">{{ $fund->three_year ?? '-' }}</span></div>
-                        <div class="col-md-3"><strong>Since Inception:</strong> <span class="text-muted">{{ $fund->since_inception ?? '-' }}</span></div>
-                        <div class="col-md-3"><strong>3 Year Std Dev:</strong> <span class="text-muted">{{ $fund->three_year_std_dev ?? '-' }}</span></div>
-                        <div class="col-md-3"><strong>Distribution Yield:</strong> <span class="text-muted">{{ $fund->distribution_yield ?? '-' }}</span></div>
-                        <div class="col-md-3"><strong>Fund AUM:</strong> <span class="text-muted">{{ $fund->fund_aum ?? '-' }}</span></div>
-                        <div class="col-md-3"><strong>Inception Date:</strong> <span class="text-muted">{{ $fund->inception_date ?? '-' }}</span></div>
-                    </div>
-                </div>
+                </div>                
             </div>
 
             <!-- Links & Status -->

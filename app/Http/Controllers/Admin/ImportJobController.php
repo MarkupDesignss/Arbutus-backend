@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Models\ImportJob;
 use App\Models\Admin;
 use App\Models\ImportJobRow;
+use App\Models\Fund;
+use App\Models\FundMonthlyReturn;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Maatwebsite\Excel\Facades\Excel;
@@ -82,6 +84,7 @@ class ImportJobController extends Controller
 
             $isValid = $fundatakey && $month_end && $monthly_return !== null && $distribution_yield !== null;
 
+            // Always save to ImportJobRow
             ImportJobRow::create([
                 'import_job_id' => $job->id,
                 'fundatakey' => $fundatakey,
@@ -91,6 +94,22 @@ class ImportJobController extends Controller
                 'is_valid' => $isValid,
                 'errors' => $isValid ? null : json_encode(['Invalid numeric data'])
             ]);
+
+            // If valid, check if fundatakey matches a fund in the funds table
+            if ($isValid) {
+                $fund = Fund::where('fundatakey', $fundatakey)->first();
+                
+                if ($fund) {
+                    // Save to FundMonthlyReturn with fund_id
+                    FundMonthlyReturn::create([
+                        'fund_id' => $fund->id,
+                        'fundatakey' => $fundatakey,
+                        'month_end' => $month_end,
+                        'monthly_return' => $monthly_return,
+                        'distribution_yield' => $distribution_yield
+                    ]);
+                }
+            }
 
             $isValid ? $valid++ : $invalid++;
         }

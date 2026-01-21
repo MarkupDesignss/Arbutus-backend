@@ -17,6 +17,16 @@ use App\Http\Controllers\Admin\ImportJobRowController;
 use App\Http\Controllers\Admin\BannerController;
 use App\Http\Controllers\Admin\ContactController;
 use App\Http\Controllers\Admin\NewsLetterController;
+use App\Http\Controllers\Admin\SettingController;
+use App\Http\Controllers\Admin\BlogController;
+use App\Http\Controllers\Admin\AuthUserController;
+use App\Http\Controllers\Admin\OurValueController;
+use App\Http\Controllers\Admin\WebPageController;
+use App\Http\Controllers\Admin\SubscriptionController;
+use App\Http\Controllers\Admin\AccessRuleController;
+use App\Http\Controllers\Admin\PlanAccessController;
+use App\Http\Controllers\Admin\ValidatedImportRowController;
+use App\Http\Controllers\Admin\FundPerformanceSnapshotController;
 use Illuminate\Support\Facades\Artisan;
 
 Route::get('/', function () {
@@ -156,6 +166,12 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::post('/store', [ImportJobController::class,'store'])->name('store');
             Route::delete('/destroy/{id}', [ImportJobController::class,'destroy'])->name('destroy');
             Route::get('/view/{id}', [ImportJobController::class,'show'])->name('show');
+            Route::get('import-jobs/sample-download', function () {
+                        return response()->download(
+                            storage_path('app/public/sample.xlsx'),
+                            'sample.xlsx'
+                        );
+                    })->name('sample-download');
         });
         /*---------------------------------End Import Job Controller------------------------------------------*/
 
@@ -165,6 +181,14 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::get('/view/{id}',[ImportJobRowController::class,'show'])->name('show');
         });
         /*---------------------------------End Import Job Controller------------------------------------------*/
+
+        /*---------------------------------Validated-Import-Row Controller------------------------------------*/
+        Route::prefix('validated-import-row')->name('validated-import-row.')->group(function(){
+            Route::get('/',[ValidatedImportRowController::class,'index'])->name('list');
+            Route::get('/view/{id}',[ValidatedImportRowController::class,'show'])->name('show');
+            Route::delete('/delete/{id}',[ValidatedImportRowController::class,'destroy'])->name('destroy');
+        });
+        /*---------------------------------End Validated-Import-Row Controller--------------------------------*/
 
         /*---------------------------------Banner Controller--------------------------------------------------*/
         Route::prefix('banner')->name('banner.')->group(function () {
@@ -192,5 +216,103 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::delete('/destroy/{id}', [NewsLetterController::class,'destroy'])->name('destroy');
         });
         /*---------------------------------End NewsLetter Controller-----------------------------------------*/
+
+        /*---------------------------------Setting Controller ------------------------------------------------*/
+        Route::prefix('settings')->name('settings.')->group(function () {
+            Route::get('/', [SettingController::class, 'index'])->name('edit');
+            Route::post('settings/update', [SettingController::class, 'update'])->name('update');
+        });
+        /*---------------------------------End Setting Controller--------------------------------------------*/
+
+        /*---------------------------------BlogController----------------------------------------------------*/
+         Route::prefix('bolg')->name('blog.')->group(function () {
+            Route::get('/list', [BlogController::class,'index'])->name('list');
+            Route::get('/add', [BlogController::class,'create'])->name('create');
+            Route::post('/store', [BlogController::class,'store'])->name('store');
+            Route::get('/edit/{id}', [BlogController::class,'edit'])->name('edit');
+            Route::post('/update/{id}', [BlogController::class,'update'])->name('update');
+            Route::delete('/destroy/{id}', [BlogController::class,'destroy'])->name('destroy');
+            Route::get('/view/{id}', [BlogController::class,'show'])->name('show');
+        });
+        /*---------------------------------End BlogController------------------------------------------------*/
+
+        /*---------------------------------Auth User Controller----------------------------------------------*/
+         Route::prefix('auth-user')->name('auth.user.')->group(function () {
+            Route::get('/list', [AuthUserController::class,'index'])->name('list');            
+            Route::delete('/destroy/{id}', [AuthUserController::class,'destroy'])->name('destroy');
+        });
+        /*---------------------------------End Auth User Controller------------------------------------------*/
+
+        /*---------------------------------Our Value Controller----------------------------------------------*/
+         Route::prefix('our-value')->name('value.')->group(function () {
+            Route::get('/list', [OurValueController::class,'index'])->name('list');
+            Route::get('/add', [OurValueController::class,'create'])->name('create');
+            Route::post('/store', [OurValueController::class,'store'])->name('store');
+            Route::get('/edit/{id}', [OurValueController::class,'edit'])->name('edit');
+            Route::post('/update/{id}', [OurValueController::class,'update'])->name('update');
+            Route::delete('/destroy/{id}', [OurValueController::class,'destroy'])->name('destroy');
+            Route::get('/view/{id}', [OurValueController::class,'show'])->name('show');
+        });
+        /*---------------------------------End Our Value Controller------------------------------------------*/
+
+        /*---------------------------------Web Page Controller-----------------------------------------------*/
+         Route::prefix('web-pages')->name('web.page.')->group(function () {
+            Route::get('/list', [WebPageController::class,'index'])->name('list');
+            Route::get('/add', [WebPageController::class,'create'])->name('create');
+            Route::post('/store', [WebPageController::class,'store'])->name('store');
+            Route::get('/edit/{id}', [WebPageController::class,'edit'])->name('edit');
+            Route::post('/update/{id}', [WebPageController::class,'update'])->name('update');
+            Route::delete('/destroy/{id}', [WebPageController::class,'destroy'])->name('destroy');
+        });
+        /*---------------------------------End Web Page Controller-------------------------------------------*/
+
+        /*---------------------------------Subscription Controller-------------------------------------------*/
+        Route::prefix('subscription')->name('subscriptions.')->group(function () {
+            Route::get('/list', [SubscriptionController::class, 'index'])->name('list');
+            Route::get('/add', [SubscriptionController::class, 'create'])->name('create');
+            Route::post('/create', [SubscriptionController::class, 'store'])->name('store');
+            Route::get('/edit/{id}', [SubscriptionController::class, 'edit'])->name('edit');
+            Route::put('/update/{id}', [SubscriptionController::class, 'update'])->name('update');
+            Route::delete('/destroy/{id}', [SubscriptionController::class, 'destroy'])->name('destroy');
+            Route::get('/view/{id}', [SubscriptionController::class,'show'])->name('show');
+
+        });
+        /*---------------------------------End Subscription Controller--------------------------------------*/
+
+        /*---------------------------------Access Rule Controller-------------------------------------------*/
+        Route::prefix('access-rule')->name('access.rule.')->group(function () {
+            Route::get('/list', [AccessRuleController::class, 'index'])->name('list');
+            Route::get('/add', [AccessRuleController::class, 'create'])->name('create');
+            Route::post('/create', [AccessRuleController::class, 'store'])->name('store');
+            Route::get('/edit/{id}', [AccessRuleController::class, 'edit'])->name('edit');
+            Route::put('/update/{id}', [AccessRuleController::class, 'update'])->name('update');
+            Route::delete('/destroy/{id}', [AccessRuleController::class, 'destroy'])->name('destroy');
+            Route::get('/view/{id}', [AccessRuleController::class,'show'])->name('show');
+        });
+        /*---------------------------------End Access Rule Controller--------------------------------------*/
+
+        /*---------------------------------Plan Access Controller------------------------------------------*/
+        Route::prefix('plan-access')->name('plan.access.')->group(function () {
+            Route::get('/list', [PlanAccessController::class, 'index'])->name('list');
+            Route::get('/add', [PlanAccessController::class, 'create'])->name('create');
+            Route::post('/create', [PlanAccessController::class, 'store'])->name('store');
+            Route::get('/edit/{id}', [PlanAccessController::class, 'edit'])->name('edit');
+            Route::put('/update/{id}', [PlanAccessController::class, 'update'])->name('update');
+            Route::delete('/destroy/{id}', [PlanAccessController::class, 'destroy'])->name('destroy');
+            Route::get('/view/{id}', [PlanAccessController::class,'show'])->name('show');
+        });
+        /*---------------------------------End Plan Access Controller--------------------------------------*/
+
+        /*---------------------------------Fund Performance Snapshot-------------------------------------*/
+        Route::prefix('fund-performance-snapshots')->name('fund.performance.')->group(function () {
+            Route::get('/list', [FundPerformanceSnapshotController::class, 'index'])->name('list');
+            Route::get('/view/{id}', [FundPerformanceSnapshotController::class, 'show'])->name('view');
+            Route::post('/toggle/{id}', [FundPerformanceSnapshotController::class, 'toggle'])->name('toggle');
+            Route::get('/months/{fund}', [FundPerformanceSnapshotController::class, 'months'])->name('months');
+            Route::post('/calculate', [FundPerformanceSnapshotController::class, 'store'])->name('store');
+            Route::delete('/destroy/{id}', [FundPerformanceSnapshotController::class, 'destroy'])->name('destroy');
+        });
+        /*---------------------------------End Fund Performance Snapshot---------------------------------*/
+
     });
 }); 

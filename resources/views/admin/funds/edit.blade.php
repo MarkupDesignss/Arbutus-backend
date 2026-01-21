@@ -127,54 +127,6 @@
                         <input type="number" step="0.01" name="fund_aum" class="form-control" value="{{ old('fund_aum', $fund->fund_aum) }}">
                     </div>
 
-                    <!-- One Month -->
-                    <div class="col-md-4 mb-3">
-                        <label>1 Month (%)</label>
-                        <input type="number" step="0.01" name="one_month" class="form-control" value="{{ old('one_month', $fund->one_month) }}">
-                    </div>
-
-                    <!-- YTD -->
-                    <div class="col-md-4 mb-3">
-                        <label>YTD (%)</label>
-                        <input type="number" step="0.01" name="ytd" class="form-control" value="{{ old('ytd', $fund->ytd) }}">
-                    </div>
-
-                    <!-- One Year -->
-                    <div class="col-md-4 mb-3">
-                        <label>1 Year (%)</label>
-                        <input type="number" step="0.01" name="one_year" class="form-control" value="{{ old('one_year', $fund->one_year) }}">
-                    </div>
-
-                    <!-- Three Year -->
-                    <div class="col-md-4 mb-3">
-                        <label>3 Year (%)</label>
-                        <input type="number" step="0.01" name="three_year" class="form-control" value="{{ old('three_year', $fund->three_year) }}">
-                    </div>
-
-                    <!-- Since Inception -->
-                    <div class="col-md-4 mb-3">
-                        <label>Since Inception (%)</label>
-                        <input type="number" step="0.01" name="since_inception" class="form-control" value="{{ old('since_inception', $fund->since_inception) }}">
-                    </div>
-
-                    <!-- Three Year Std Dev -->
-                    <div class="col-md-4 mb-3">
-                        <label>3 Year Std Dev (%)</label>
-                        <input type="number" step="0.01" name="three_year_std_dev" class="form-control" value="{{ old('three_year_std_dev', $fund->three_year_std_dev) }}">
-                    </div>
-
-                    <!-- Distribution Yield -->
-                    <div class="col-md-4 mb-3">
-                        <label>Distribution Yield (%)</label>
-                        <input type="number" step="0.01" name="distribution_yield" class="form-control" value="{{ old('distribution_yield', $fund->distribution_yield) }}">
-                    </div>
-
-                    <!-- Inception Date -->
-                    <div class="col-md-4 mb-3">
-                        <label>Inception Date</label>
-                        <input type="date" name="inception_date" class="form-control" value="{{ old('inception_date', $fund->inception_date) }}">
-                    </div>
-
                     <!-- Fund Library Link -->
                     <div class="col-md-4 mb-3">
                         <label>Fund Library Link</label>

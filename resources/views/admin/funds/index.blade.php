@@ -16,13 +16,12 @@
                     <thead class="text-uppercase">
                         <tr>
                             <th>SN.</th>
-                            <th>Fund Name</th>
+                            <th>Fund Data Key</th>
                             <th>Firm</th>
                             <th>Asset Class</th>
                             <th>Type</th>
                             <th>Strategy</th>
-                            <th>Category</th>
-                            <th>Risk Rating</th>
+                            <th>Category</th>                            
                             <th>Status</th>
                             <th>Action</th>
                         </tr>
@@ -31,13 +30,12 @@
                         @forelse($funds as $fund)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
-                            <td>{{ $fund->fund_name }}</td>
+                            <td>{{ $fund->fundatakey }}</td>
                             <td>{{ $fund->firm->name ?? '-' }}</td>
                             <td>{{ $fund->assetClass->name ?? '-' }}</td>
                             <td>{{ $fund->type->name ?? '-' }}</td>
                             <td>{{ $fund->strategy->name ?? '-' }}</td>
-                            <td>{{ $fund->category->name ?? '-' }}</td>
-                            <td>{{ $fund->riskRating->name ?? '-' }}</td>
+                            <td>{{ $fund->category->name ?? '-' }}</td>                           
                             <td>
                                 @if($fund->status == 1)
                                     <span class="badge bg-success">Active</span>
@@ -56,10 +54,11 @@
                                        title="View">
                                         <i class="fas fa-eye"></i>
                                     </a>
-                                    <form action="{{ route('admin.funds.destroy', $fund->id) }}" method="POST">
+                                    <form action="{{ route('admin.funds.destroy', $fund->id) }}" method="POST"
+                                        class="delete-form">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn btn-sm btn-outline-danger" onclick="return confirm('Are you sure?')">
+                                        <button type="button" class="btn btn-sm btn-outline-danger delete-btn">
                                             <i class="fas fa-trash"></i>
                                         </button>
                                     </form>

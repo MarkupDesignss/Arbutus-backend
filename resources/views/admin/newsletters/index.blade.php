@@ -13,7 +13,6 @@
                     <thead class="text-uppercase">
                         <tr>
                             <th scope="col" style="width: 50px;  background-color: #f1f5f9;">#</th>
-                            <th scope="col" style="width: 150px;  background-color: #f1f5f9;">Name</th>
                             <th scope="col" style="width: 150px;  background-color: #f1f5f9;">Email</th>
                             <th scope="col" style="width: 100px;  background-color: #f1f5f9;">Action</th>
                         </tr>
@@ -21,8 +20,7 @@
                     <tbody>
                         @forelse($newsletters as $list)
                             <tr>
-                                <td>{{ $loop->iteration }}</td>
-                                <td>{{ $list->name }}</td>                               
+                                <td>{{ $loop->iteration }}</td>                                                              
                                 <td>{{ $list->email }}</td>
                                 
                                 <td>

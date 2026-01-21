@@ -23,6 +23,7 @@
                     <div class="col-md-4 mb-3">
                         <label>Symbol Code</label>
                         <input type="text" name="symbol_code" class="form-control" value="{{ old('symbol_code') }}">
+                        @error('symbol_code') <small class="text-danger">{{ $message }}</small> @enderror
                     </div>
 
                     <div class="col-md-4 mb-3">
@@ -50,6 +51,7 @@
                                 <option value="{{ $ac->id }}" {{ old('asset_class_id') == $ac->id ? 'selected' : '' }}>{{ $ac->name }}</option>
                             @endforeach
                         </select>
+                        @error('asset_class_id') <small class="text-danger">{{ $message }}</small> @enderror
                     </div>
 
                     <div class="col-md-4 mb-3">
@@ -60,6 +62,7 @@
                                 <option value="{{ $type->id }}" {{ old('type_id') == $type->id ? 'selected' : '' }}>{{ $type->name }}</option>
                             @endforeach
                         </select>
+                         @error('type_id') <small class="text-danger">{{ $message }}</small> @enderror
                     </div>
 
                     <div class="col-md-4 mb-3">
@@ -70,6 +73,7 @@
                                 <option value="{{ $strategy->id }}" {{ old('strategy_id') == $strategy->id ? 'selected' : '' }}>{{ $strategy->name }}</option>
                             @endforeach
                         </select>
+                         @error('strategy_id') <small class="text-danger">{{ $message }}</small> @enderror
                     </div>
 
                     <div class="col-md-4 mb-3">
@@ -80,6 +84,7 @@
                                 <option value="{{ $cat->id }}" {{ old('category_id') == $cat->id ? 'selected' : '' }}>{{ $cat->name }}</option>
                             @endforeach
                         </select>
+                        @error('category_id') <small class="text-danger">{{ $message }}</small> @enderror
                     </div>
 
                     <div class="col-md-4 mb-3">
@@ -90,52 +95,13 @@
                                 <option value="{{ $rr->id }}" {{ old('risk_rating_id') == $rr->id ? 'selected' : '' }}>{{ $rr->name }}</option>
                             @endforeach
                         </select>
+                        @error('risk_rating_id') <small class="text-danger">{{ $message }}</small> @enderror
                     </div>
 
                     <div class="col-md-4 mb-3">
                         <label>Fund AUM</label>
                         <input type="number" step="0.01" name="fund_aum" class="form-control" value="{{ old('fund_aum') }}">
-                    </div>
-
-                    <div class="col-md-4 mb-3">
-                        <label>1 Month (%)</label>
-                        <input type="number" step="0.01" name="one_month" class="form-control" value="{{ old('one_month') }}">
-                    </div>
-
-                    <div class="col-md-4 mb-3">
-                        <label>YTD (%)</label>
-                        <input type="number" step="0.01" name="ytd" class="form-control" value="{{ old('ytd') }}">
-                    </div>
-
-                    <div class="col-md-4 mb-3">
-                        <label>1 Year (%)</label>
-                        <input type="number" step="0.01" name="one_year" class="form-control" value="{{ old('one_year') }}">
-                    </div>
-
-                    <div class="col-md-4 mb-3">
-                        <label>3 Year (%)</label>
-                        <input type="number" step="0.01" name="three_year" class="form-control" value="{{ old('three_year') }}">
-                    </div>
-
-                    <div class="col-md-4 mb-3">
-                        <label>Since Inception (%)</label>
-                        <input type="number" step="0.01" name="since_inception" class="form-control" value="{{ old('since_inception') }}">
-                    </div>
-
-                    <div class="col-md-4 mb-3">
-                        <label>3 Year Std Dev (%)</label>
-                        <input type="number" step="0.01" name="three_year_std_dev" class="form-control" value="{{ old('three_year_std_dev') }}">
-                    </div>
-
-                    <div class="col-md-4 mb-3">
-                        <label>Distribution Yield (%)</label>
-                        <input type="number" step="0.01" name="distribution_yield" class="form-control" value="{{ old('distribution_yield') }}">
-                    </div>
-
-                    <div class="col-md-4 mb-3">
-                        <label>Inception Date</label>
-                        <input type="date" name="inception_date" class="form-control" value="{{ old('inception_date') }}">
-                    </div>
+                    </div>                    
 
                     <div class="col-md-4 mb-3">
                         <label>Fund Library Link</label>
@@ -154,7 +120,6 @@
                             <option value="0" {{ old('status') == 0 ? 'selected' : '' }}>Inactive</option>
                         </select>
                     </div>
-
                 </div>
 
                 <div class="mt-4 text-end">

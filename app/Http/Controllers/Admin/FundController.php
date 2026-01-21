@@ -11,6 +11,8 @@ use App\Models\Type;
 use App\Models\Strategie;
 use App\Models\Category;
 use App\Models\RiskRating;
+use App\Models\FundMonthlyReturn;
+use App\Models\ImportJobRow;
 
 class FundController extends Controller
 {
@@ -47,14 +49,6 @@ class FundController extends Controller
             'strategy_id' => 'required|exists:strategies,id',
             'category_id' => 'required|exists:categories,id',
             'risk_rating_id' => 'required|exists:risk_ratings,id',
-            'one_month' => 'nullable|numeric',
-            'ytd' => 'nullable|numeric',
-            'one_year' => 'nullable|numeric',
-            'three_year' => 'nullable|numeric',
-            'since_inception' => 'nullable|numeric',
-            'three_year_std_dev' => 'nullable|numeric',
-            'distribution_yield' => 'nullable|numeric',
-            'inception_date' => 'nullable|date',
             'fund_aum' => 'nullable|numeric',
             'fund_library_link' => 'nullable|url',
             'external_link' => 'nullable|url',
@@ -92,15 +86,7 @@ class FundController extends Controller
             'type_id' => 'required|exists:types,id',
             'strategy_id' => 'required|exists:strategies,id',
             'category_id' => 'required|exists:categories,id',
-            'risk_rating_id' => 'required|exists:risk_ratings,id',
-            'one_month' => 'nullable|numeric',
-            'ytd' => 'nullable|numeric',
-            'one_year' => 'nullable|numeric',
-            'three_year' => 'nullable|numeric',
-            'since_inception' => 'nullable|numeric',
-            'three_year_std_dev' => 'nullable|numeric',
-            'distribution_yield' => 'nullable|numeric',
-            'inception_date' => 'nullable|date',
+            'risk_rating_id' => 'required|exists:risk_ratings,id', 
             'fund_aum' => 'nullable|numeric',
             'fund_library_link' => 'nullable|url',
             'external_link' => 'nullable|url',
@@ -115,6 +101,14 @@ class FundController extends Controller
     public function destroy($id)
     {
         $fund = Fund::findOrFail($id);
+        
+        // Delete related records from ImportJobRow table
+        ImportJobRow::where('fundatakey', $fund->fundatakey)->delete();
+        
+        // Delete related records from FundMonthlyReturn table
+        FundMonthlyReturn::where('fund_id', $fund->id)->delete();
+        
+        // Delete the fund
         $fund->delete();
 
         return redirect()->route('admin.funds.list')->with('success', 'Fund deleted successfully!');
