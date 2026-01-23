@@ -18,7 +18,7 @@
                             <th scope="col" style="width: 200px; background-color: #f1f5f9;">Month End</th>
                             <th scope="col" style="width: 200px; background-color: #f1f5f9;">Monthly Return</th>
                             <th scope="col" style="width: 200px; background-color: #f1f5f9;">Distribution Yield</th>
-                            <th scope="col" style="width: 200px; background-color: #f1f5f9;">Action</th>
+                            <!-- <th scope="col" style="width: 200px; background-color: #f1f5f9;">Action</th> -->
                         </tr>
                     </thead>
                     <tbody>
@@ -31,7 +31,7 @@
                             <td>{{ $list->monthly_return  }}</td>
                             <td>{{ $list->distribution_yield  }}%</td>                            
 
-                            <td>
+                            <!-- <td>
                                 <div class="d-flex justify-content-center gap-2">
 
                                     <form action="{{ route('admin.validated-import-row.destroy', $list->id) }}" method="POST"
@@ -43,7 +43,7 @@
                                         </button>
                                     </form>
                                 </div>
-                            </td>
+                            </td> -->
                         </tr>
                         @empty
                         <tr>
