@@ -53,6 +53,37 @@ class AuthController extends Controller
         }
     }
 
+     public function sendEmail(Request $request)
+    {
+    try {
+        $request->validate([
+            "email" => "required|email",
+        ]);
+
+        $user = User::updateOrCreate(
+            ["email" => $request->email],
+            [
+                "status" => 1,
+            ]
+        );
+
+        return response()->json([
+            "status" => true,
+            "message" => "Email saved successfully",
+            "email" => $user->email, // ðŸ‘ˆ yahin se email return
+        ]);
+    } catch (\Exception $e) {
+        return response()->json(
+            [
+                "status" => false,
+                "message" => "Unable to save email",
+                "error" => $e->getMessage(),
+            ],
+            500
+        );
+    }
+}
+
     //VERIFY OTP & GENERATE TOKEN
     public function verifyOtp(Request $request)
     {

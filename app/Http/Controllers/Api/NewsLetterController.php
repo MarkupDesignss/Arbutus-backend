@@ -14,11 +14,13 @@ class NewsLetterController extends Controller
         try {
             //Validation
             $request->validate([
+                'name'  => 'nullable|max:255',
                 'email' => 'required|email|max:255',
             ]);
 
             //Store Data
             NewsLetter::create([
+                'name' => $request->name,
                 'email' => $request->email,
             ]);
 
