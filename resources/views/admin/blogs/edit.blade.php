@@ -51,6 +51,24 @@
                         </select>
                     </div>
 
+                    <!-- ===== NEW FIELD: TYPE ===== -->
+                    <div class="col-md-4 mb-3">
+                        <label>Type</label><span class="text-danger">*</span>
+                        <select name="type" class="form-select">
+                            <option value="news" {{ old('type',$blog->type)=='news' ? 'selected' : '' }}>News</option>
+                            <option value="education" {{ old('type',$blog->type)=='education' ? 'selected' : '' }}>Education</option>
+                        </select>
+                        @error('type') <small class="text-danger">{{ $message }}</small> @enderror
+                    </div>
+
+                    <!-- ===== NEW FIELD: VIDEO URL ===== -->
+                    <div class="col-md-8 mb-3">
+                        <label>Video URL</label>
+                        <input type="text" name="video_url" class="form-control" value="{{ old('video_url',$blog->video_url) }}" placeholder="Enter video URL">
+                        @error('video_url') <small class="text-danger">{{ $message }}</small> @enderror
+                    </div>
+                    <!-- ===== NEW FIELDS END ===== -->
+
                     <div class="col-md-12 mb-3">
                         <label>Short Description</label>
                         <textarea name="short_description" class="form-control" rows="3">{{ old('short_description',$blog->short_description) }}</textarea>

@@ -23,14 +23,16 @@ class BlogController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'title'       => 'required|string|max:255',
-            'slug'        => 'required|string|max:255',
+            'title'              => 'required|string|max:255',
+            'slug'               => 'required|string|max:255',
             'author_name'        => 'required|string|max:255',
-            'post_date' => 'required|date',
-            'status'      => 'required|in:0,1', 
-            'short_description' => 'required|string', 
-            'long_description' => 'nullable|string', 
-            'image'       => 'required|image|mimes:jpg,jpeg,png,webp|max:10240', // 10MB
+            'post_date'          => 'required|date',
+            'status'             => 'required|in:0,1', 
+            'short_description'  => 'required|string', 
+            'long_description'   => 'nullable|string', 
+            'image'              => 'required|image|mimes:jpg,jpeg,png,webp|max:10240', // 10MB
+            'type'               => 'required|in:news,education',
+            'video_url'          => 'nullable|url',
         ]);
 
         $image = time().'.'.$request->image->extension();
@@ -44,7 +46,9 @@ class BlogController extends Controller
             'image' => $image,
             'short_description' => $request->short_description,
             'long_description' => $request->long_description,
-            'status' => $request->status ?? 1
+            'type'              => $request->type,
+            'video_url'         => $request->video_url,
+            'status' => $request->status ?? 1            
         ]);
 
         return redirect()->route('admin.blog.list')->with('success','Blog Added Successfully!');
@@ -69,6 +73,8 @@ class BlogController extends Controller
             'short_description'  => 'required|string',
             'long_description'   => 'nullable|string',
             'image'              => 'nullable|image|mimes:jpg,jpeg,png,webp|max:10240',
+            'type'               => 'required|in:news,education',
+            'video_url'          => 'nullable|url',
         ]);
 
         if ($request->hasFile('image')) {
@@ -96,6 +102,8 @@ class BlogController extends Controller
             'short_description' => $request->short_description,
             'long_description'  => $request->long_description,
             'status'            => $request->status,
+            'type'              => $request->type,
+            'video_url'         => $request->video_url,
         ]);
 
         return redirect()->route('admin.blog.list')->with('success', 'Blog Updated Successfully!');

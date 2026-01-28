@@ -32,6 +32,16 @@
             </div>
 
             <div class="row mb-3">
+                <div class="col-md-3 fw-bold">Type:</div>
+                <div class="col-md-9">{{ $blog->type }}</div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-md-3 fw-bold">Video Url:</div>
+                <div class="col-md-9">{{ $blog->video_url }}</div>
+            </div>
+
+            <div class="row mb-3">
                 <div class="col-md-3 fw-bold">Status:</div>
                 <div class="col-md-9">
                     @if($blog->status)

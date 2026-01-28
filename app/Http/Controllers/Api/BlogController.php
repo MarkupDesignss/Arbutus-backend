@@ -13,12 +13,25 @@ class BlogController extends Controller
     public function list()
     {
         try {
-            $blogs = Blog::where('status', 1)
-                        ->orderBy('post_date', 'desc')
-                        ->get(['id','title','slug','short_description','image','author_name','post_date']);
+            // News Blogs
+            $newsBlogs = Blog::where('status', 1)
+                ->where('type', 'news')
+                ->orderBy('post_date', 'desc')
+                ->get(['id','title','slug','short_description','image','author_name','post_date','video_url']);
 
-            // Map image to full URL
-            $blogs->transform(function($blog){
+            // Education Blogs
+            $educationBlogs = Blog::where('status', 1)
+                ->where('type', 'education')
+                ->orderBy('post_date', 'desc')
+                ->get(['id','title','slug','short_description','image','author_name','post_date','video_url']);
+
+            // map images
+            $newsBlogs->transform(function($blog){
+                $blog->image = $blog->image ? asset('storage/blogs/'.$blog->image) : null;
+                return $blog;
+            });
+
+            $educationBlogs->transform(function($blog){
                 $blog->image = $blog->image ? asset('storage/blogs/'.$blog->image) : null;
                 return $blog;
             });
@@ -26,7 +39,10 @@ class BlogController extends Controller
             return response()->json([
                 'status' => true,
                 'message' => 'Blog list fetched successfully',
-                'data' => $blogs
+                'data' => [
+                    'news' => $newsBlogs,
+                    'education' => $educationBlogs
+                ]
             ]);
         } catch (Exception $e) {
             return response()->json([

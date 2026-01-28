@@ -98,12 +98,6 @@
             <span class="nav-label">Montly Returns</span>
         </a>
         
-        <a href="{{ route('admin.fund.performance.list') }}"
-            class="nav-item {{ request()->routeIs('admin.fund.performance.*') ? 'active' : '' }}">
-            <i class="nav-icon bi bi-bar-chart-line"></i>
-            <span class="nav-label">Fund Snapshots</span>
-        </a>
-        
         <!-- Subscriptions -->
         <a href="{{ route('admin.subscriptions.list') }}"
             class="nav-item {{ request()->routeIs('admin.subscriptions.*') ? 'active' : '' }}">
@@ -164,6 +158,7 @@
                 || request()->routeIs('admin.value.*')
                 || request()->routeIs('admin.settings.*')
                 || request()->routeIs('admin.web.page.*')
+                || request()->routeIs('admin.web.sponsors.*')
                 ? 'open active' : '' }}">
 
                 <a href="javascript:void(0);" class="nav-item sidebar-link">
@@ -227,6 +222,13 @@
                             class="{{ request()->routeIs('admin.value.*') ? 'active' : '' }}">
                             <i class="bi bi-award"></i>
                             <span>Our Values</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('admin.sponsors.list') }}"
+                            class="{{ request()->routeIs('admin.sponsors.*') ? 'active' : '' }}">
+                            <i class="bi bi-award"></i>
+                            <span>Sponsors</span>
                         </a>
                     </li>
                     <li>

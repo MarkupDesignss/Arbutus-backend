@@ -27,6 +27,7 @@ use App\Http\Controllers\Admin\AccessRuleController;
 use App\Http\Controllers\Admin\PlanAccessController;
 use App\Http\Controllers\Admin\ValidatedImportRowController;
 use App\Http\Controllers\Admin\FundPerformanceSnapshotController;
+use App\Http\Controllers\Admin\SponsorsController;
 use Illuminate\Support\Facades\Artisan;
 
 Route::get('/', function () {
@@ -303,16 +304,18 @@ Route::prefix('admin')->name('admin.')->group(function () {
         });
         /*---------------------------------End Plan Access Controller--------------------------------------*/
 
-        /*---------------------------------Fund Performance Snapshot-------------------------------------*/
-        Route::prefix('fund-performance-snapshots')->name('fund.performance.')->group(function () {
-            Route::get('/list', [FundPerformanceSnapshotController::class, 'index'])->name('list');
-            Route::get('/view/{id}', [FundPerformanceSnapshotController::class, 'show'])->name('view');
-            Route::post('/toggle/{id}', [FundPerformanceSnapshotController::class, 'toggle'])->name('toggle');
-            Route::get('/months/{fund}', [FundPerformanceSnapshotController::class, 'months'])->name('months');
-            Route::post('/calculate', [FundPerformanceSnapshotController::class, 'store'])->name('store');
-            Route::delete('/destroy/{id}', [FundPerformanceSnapshotController::class, 'destroy'])->name('destroy');
+        /*---------------------------------Sponsors Controller --------------------------------------------*/
+        Route::prefix('sponsors')->name('sponsors.')->group(function () {
+            Route::get('/list', [SponsorsController::class, 'index'])->name('list');
+            Route::get('/add', [SponsorsController::class, 'create'])->name('create');
+            Route::post('/create', [SponsorsController::class, 'store'])->name('store');
+            Route::get('/edit/{id}', [SponsorsController::class, 'edit'])->name('edit');
+            Route::put('/update/{id}', [SponsorsController::class, 'update'])->name('update');
+            Route::delete('/destroy/{id}', [SponsorsController::class, 'destroy'])->name('destroy');
         });
-        /*---------------------------------End Fund Performance Snapshot---------------------------------*/
+        /*---------------------------------End sponsors Controller ---------------------------------------*/
+
+    
 
     });
 }); 

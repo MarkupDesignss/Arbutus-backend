@@ -18,6 +18,7 @@ use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\StrategyController;
 use App\Http\Controllers\Api\TypeController;
 use App\Http\Controllers\Api\FundController;
+use App\Http\Controllers\Api\SponsorsController;
 
 
 Route::post('/send-otp', [AuthController::class, 'sendOtp']);
@@ -68,6 +69,9 @@ Route::get('types', [TypeController::class, 'index']);
 //Get Funds
 Route::get('funds', [FundController::class, 'index']);
 Route::get('filter-funds', [FundController::class, 'filterData']);
+
+//Sponsors 
+Route::get('sponsors-list', [SponsorsController::class, 'index']);
 
 // Protected Routes
 Route::middleware('auth:sanctum')->group(function () {

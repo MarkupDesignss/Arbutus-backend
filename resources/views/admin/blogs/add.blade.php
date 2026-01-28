@@ -1,7 +1,7 @@
 @extends('admin.layouts.admin')
 @section('content')
 
-<div class="container mt-4">    
+<div class="container mt-4">
     <div class="d-flex justify-content-between align-items-center mb-3">
         <h3 style="font-size: 1.5rem; color: #0d6efd;" class="mb-0 fw-bold">Add Blog</h3>
         <a href="{{ route('admin.blog.list') }}" class="btn btn-primary btn-custom-add">
@@ -36,7 +36,7 @@
                         <input type="date" name="post_date" class="form-control" value="{{ old('post_date') }}">
                         @error('post_date') <small class="text-danger">{{ $message }}</small> @enderror
                     </div>
-                     <div class="col-md-4 mb-3">
+                    <div class="col-md-4 mb-3">
                         <label>Author Name</label><span style="color:red;">*</span>
                         <input type="text" name="author_name" class="form-control" value="{{ old('author_name') }}">
                         @error('author_name') <small class="text-danger">{{ $message }}</small> @enderror
@@ -50,6 +50,23 @@
                         </select>
                         @error('status') <small class="text-danger">{{ $message }}</small> @enderror
                     </div>
+                    <div class="col-md-4 mb-3">
+                        <label for="type">Type</label><span style="color:red;">*</span>
+                        <select name="type" id="type" class="form-select">
+                            <option value="news" {{ old('type') == 'news' ? 'selected' : '' }}>News</option>
+                            <option value="education" {{ old('type') == 'education' ? 'selected' : '' }}>Education
+                            </option>
+                        </select>
+                        @error('type') <small class="text-danger">{{ $message }}</small> @enderror
+                    </div>
+
+                    <div class="col-md-8 mb-3">
+                        <label for="video_url">Video URL</label>
+                        <input type="text" name="video_url" class="form-control" value="{{ old('video_url') }}"
+                            placeholder="Enter video URL">
+                        @error('video_url') <small class="text-danger">{{ $message }}</small> @enderror
+                    </div>
+
                     <div class="col-md-12 mb-3">
                         <label for="short_description">Short Description</label><span style="color:red;">*</span>
                         <textarea class="form-control" name="short_description" id="short_description" rows="4"
