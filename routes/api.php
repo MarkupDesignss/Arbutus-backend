@@ -79,10 +79,12 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/profile-update', [AuthController::class,'updateProfile']);
     Route::post('/logout', [AuthController::class,'logout']);
     Route::post('/delete-account', [AuthController::class, 'deleteAccount']);
+    Route::get('/user/subscriptions', [AuthController::class, 'userSubscriptions']);
     //SUBSCRIPTION PURCHASE API
     // Route::post('/subscribe-payment', [SubscriptionPurchaseController::class,'subscribe']);
     Route::post('/subscribe-payment', [SubscriptionPurchaseController::class,'subscribe']);
     // Route::get('/payment-success', [SubscriptionPurchaseController::class,'success']);
+    
 });
 
 Route::get('/payment-success', [SubscriptionPurchaseController::class,'success']);

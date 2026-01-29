@@ -53,36 +53,36 @@ class AuthController extends Controller
         }
     }
 
-     public function sendEmail(Request $request)
+    public function sendEmail(Request $request)
     {
-    try {
-        $request->validate([
-            "email" => "required|email",
-        ]);
+        try {
+            $request->validate([
+                "email" => "required|email",
+            ]);
 
-        $user = User::updateOrCreate(
-            ["email" => $request->email],
-            [
-                "status" => 1,
-            ]
-        );
+            $user = User::updateOrCreate(
+                ["email" => $request->email],
+                [
+                    "status" => 1,
+                ]
+            );
 
-        return response()->json([
-            "status" => true,
-            "message" => "Email saved successfully",
-            "email" => $user->email, // ðŸ‘ˆ yahin se email return
-        ]);
-    } catch (\Exception $e) {
-        return response()->json(
-            [
-                "status" => false,
-                "message" => "Unable to save email",
-                "error" => $e->getMessage(),
-            ],
-            500
-        );
+            return response()->json([
+                "status" => true,
+                "message" => "Email saved successfully",
+                "email" => $user->email,
+            ]);
+        } catch (\Exception $e) {
+            return response()->json(
+                [
+                    "status" => false,
+                    "message" => "Unable to save email",
+                    "error" => $e->getMessage(),
+                ],
+                500
+            );
+        }
     }
-}
 
     //VERIFY OTP & GENERATE TOKEN
     public function verifyOtp(Request $request)
@@ -143,6 +143,54 @@ class AuthController extends Controller
         }
     }
 
+    // USER SUBSCRIPTION LISTING
+    public function userSubscriptions(Request $request)
+    {
+        try {
+            $user = auth()->user();
+
+            if (!$user) {
+                return response()->json([
+                    'status' => false,
+                    'message' => 'Unauthorized'
+                ], 401);
+            }
+
+            $subscriptions = \App\Models\UserSubscription::with('subscription')
+                ->where('user_id', $user->id)
+                ->orderBy('id', 'desc')
+                ->get()
+                ->map(function ($sub) {
+                    return [
+                        'subscription_id' => $sub->subscription_id,
+                        'plan_name'       => $sub->subscription->name ?? null,
+                        'plan_type'       => $sub->plan_type,
+                        'start_date'      => $sub->start_date,
+                        'end_date'        => $sub->end_date,
+                        'status'          => $sub->status,
+                        'is_active'       => (
+                            $sub->status === 'active' &&
+                            now()->lte($sub->end_date)
+                        ),
+                    ];
+                });
+
+            return response()->json([
+                'status' => true,
+                'message' => 'User subscriptions fetched successfully',
+                'data' => $subscriptions
+            ]);
+
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Failed to fetch subscriptions',
+                'error' => $e->getMessage()
+            ], 500);
+        }
+    }
+
+   
     //GET USER PROFILE
     public function profile(Request $request)
     {

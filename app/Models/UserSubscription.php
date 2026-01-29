@@ -16,4 +16,10 @@ class UserSubscription extends Model
         'end_date',
         'status',
     ];
+
+    public function subscription()
+    {
+        return $this->belongsTo(\App\Models\Subscription::class);
+    }
+
 }

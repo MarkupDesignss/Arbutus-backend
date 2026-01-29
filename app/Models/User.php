@@ -28,4 +28,10 @@ class User extends Authenticatable
     protected $casts = [
         'otp_expires_at' => 'datetime',
     ];
+
+    public function subscriptions()
+    {
+        return $this->hasMany(\App\Models\UserSubscription::class);
+    }
+
 }

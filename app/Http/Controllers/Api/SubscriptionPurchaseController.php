@@ -57,24 +57,70 @@ class SubscriptionPurchaseController extends Controller
     }
 
     // SUCCESS
+    // public function success(Request $request)
+    // {
+    //     Stripe::setApiKey(config('services.stripe.secret'));
+
+    //     $session = \Stripe\Checkout\Session::retrieve($request->session_id);
+
+    //     if($session->payment_status != 'paid'){
+    //         return response()->json(['status'=>false,'message'=>'Payment failed']);
+    //     }
+
+    //     $userId = $session->metadata->user_id;
+    //     $subscriptionId = $session->metadata->subscription_id;
+    //     $planType = $session->metadata->plan_type;
+
+    //     $start = now();
+    //     $end   = $planType == 'monthly' ? now()->addDays(30) : now()->addDays(365);
+
+    //     // 1️⃣ Create subscription FIRST
+    //     $userSub = UserSubscription::create([
+    //         'user_id' => $userId,
+    //         'subscription_id' => $subscriptionId,
+    //         'plan_type' => $planType,
+    //         'start_date' => $start,
+    //         'end_date' => $end,
+    //         'status' => 'active'
+    //     ]);
+
+    //     // 2️⃣ Create payment with user_subscription_id
+    //     Payment::create([
+    //         'user_id' => $userId,
+    //         'user_subscription_id' => $userSub->id,
+    //         'stripe_payment_intent_id' => $session->payment_intent,
+    //         'amount' => $session->amount_total / 100,
+    //         'status' => 'paid'
+    //     ]);
+
+    //     return response()->json([
+    //         'status'=>true,
+    //         'message'=>'Subscription activated successfully'
+    //     ]);
+    // }
     public function success(Request $request)
     {
         Stripe::setApiKey(config('services.stripe.secret'));
 
         $session = \Stripe\Checkout\Session::retrieve($request->session_id);
 
-        if($session->payment_status != 'paid'){
-            return response()->json(['status'=>false,'message'=>'Payment failed']);
+        if ($session->payment_status !== 'paid') {
+            return response()->json([
+                'status' => false,
+                'message' => 'Payment failed'
+            ]);
         }
 
-        $userId = $session->metadata->user_id;
+        $userId         = $session->metadata->user_id;
         $subscriptionId = $session->metadata->subscription_id;
-        $planType = $session->metadata->plan_type;
+        $planType       = $session->metadata->plan_type;
 
         $start = now();
-        $end   = $planType == 'monthly' ? now()->addDays(30) : now()->addDays(365);
+        $end   = $planType === 'monthly'
+            ? now()->addDays(30)
+            : now()->addDays(365);
 
-        // 1️⃣ Create subscription FIRST
+        // Create subscription
         $userSub = UserSubscription::create([
             'user_id' => $userId,
             'subscription_id' => $subscriptionId,
@@ -84,7 +130,7 @@ class SubscriptionPurchaseController extends Controller
             'status' => 'active'
         ]);
 
-        // 2️⃣ Create payment with user_subscription_id
+        // Create payment
         Payment::create([
             'user_id' => $userId,
             'user_subscription_id' => $userSub->id,
@@ -93,10 +139,15 @@ class SubscriptionPurchaseController extends Controller
             'status' => 'paid'
         ]);
 
-        return response()->json([
-            'status'=>true,
-            'message'=>'Subscription activated successfully'
-        ]);
+        // 👉 FRONTEND REDIRECT
+        return redirect()->away(
+            'http://localhost:5173/arbutus-web/payment-success?' . http_build_query([
+                'status' => 'success',
+                'session_id' => $session->id,
+                'subscription_id' => $subscriptionId,
+                'plan_type' => $planType
+            ])
+        );
     }
 
 }
